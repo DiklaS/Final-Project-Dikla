@@ -1,0 +1,9 @@
+05/Jul/2023:18:37:54 +0000 GET /main.e5f826d7561b038cbc93.hot-update.json 404 5.944 ms
+05/Jul/2023:18:37:55 +0000 GET /main.e5f826d7561b038cbc93.hot-update.json 404 2.005 ms
+05/Jul/2023:18:38:28 +0000 GET /signup 404 0.744 ms
+06/Jul/2023:05:20:22 +0000 GET /signup 404 3.098 ms
+06/Jul/2023:05:27:38 +0000 GET /main.1eb4fc95e2fb0edaf03c.hot-update.json 404 11.181 ms
+06/Jul/2023:05:27:47 +0000 GET /main.1eb4fc95e2fb0edaf03c.hot-update.json 404 6.739 ms
+06/Jul/2023:05:35:39 +0000 POST /api/users 400 80.978 ms
+06/Jul/2023:05:36:07 +0000 POST /api/users 400 5.893 ms
+06/Jul/2023:05:36:17 +0000 POST /api/users 400 3.848 ms

@@ -1,0 +1,28 @@
+[
+  {
+    "item": "Bikes",
+    "company": "Stumpjumper",
+    "price": 9500,
+    "size": "S2",
+    "location": "Pardes Hana",
+    "contactName": "Guy",
+    "phone": "0501111111",
+    "image": {
+      "url": "http://localhost:8181/initialData/imgs/bike-1.jpg",
+      "alt": "bike"
+    }
+  },
+  {
+    "item": "Shoes",
+    "company": "Lake",
+    "price": 300,
+    "size": "44",
+    "location": "Modeen",
+    "contactName": "Tal",
+    "phone": "0502222222",
+    "image": {
+      "url": "http://localhost:8181/initialData/imgs/shoes-1.jpg",
+      "alt": "shoes"
+    }
+  }
+]
