@@ -20,8 +20,11 @@ const editItemSchema = Joi.object({
     }).required(), */
     url: Joi.string().regex(
         new RegExp(
-          /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}| https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/
-        )
+  /^(https?:\/\/)?([\w.-]+)(:\d+)?(\/[^\s?#]*)?(\?[^?\s#]*)?(#\S*)?$/
+)
+
+
+
       ).required(),
     alt: Joi.string().min(2).max(256).required(),
     

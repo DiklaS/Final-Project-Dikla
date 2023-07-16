@@ -20,10 +20,10 @@ const UsersTablePage = () => {
 
   useEffect(() => {
   axios
-    .get("users/")
+    .get("/users")
     .then(({ data }) => {
-      //console.log("data", data);
-      setUsersArr(data.users);
+      console.log("data", data);
+      setUsersArr(data);
     })
     .catch((err) => {
       console.log("err from axios", err);
@@ -34,7 +34,7 @@ const UsersTablePage = () => {
 
     const handleDeleteFromInitialUsersArr = async (id) => {
       try {
-        await axios.delete("/users/deleteUser/" + id); // /users/:id
+        await axios.delete("/users/" + id); // /users/:id
         setUsersArr((newUsersArr) =>
           newUsersArr.filter((item) => item._id !== id)
         );
@@ -51,11 +51,11 @@ const UsersTablePage = () => {
           }
         const updatedUser = {
         ...newUser,
-        biz: !newUser.biz,
+        isAdmin: !newUser.isAdmin,
         };
         const { _id, isAdmin, ...updatedUserData } = updatedUser;
         console.log("id:", id);
-        await axios.put("/users/" + id, updatedUserData); // /users/:id
+        await axios.patch("/users/" + id, updatedUserData); // /users/:id
         setUsersArr(prevState => prevState.map(user => user._id === id ? updatedUser : user));
       } catch (err) {
         console.log("error when updating user", err);
@@ -69,7 +69,7 @@ const UsersTablePage = () => {
     return (
       <Box>
         <Typography variant="h4" textAlign={"center"} my={2}>
-          Users Table Page
+          Users Table 
         </Typography>
         <Typography variant="h6" textAlign={"center"} my={2}>
          Here you can see all the users and their status.
@@ -81,13 +81,13 @@ const UsersTablePage = () => {
           <TableRow>
             <TableCell>Users id</TableCell>
             
-            <TableCell align="left">First Name&nbsp;</TableCell>
-            <TableCell align="left">Last Name&nbsp;</TableCell>
-            <TableCell align="left">Email&nbsp;</TableCell>
-            <TableCell align="left">Business&nbsp;</TableCell>
-            <TableCell align="left">Admin&nbsp;</TableCell>
-            <TableCell align="left">Biz Status&nbsp;</TableCell>
-            <TableCell align="left">Delete User&nbsp;</TableCell>
+            <TableCell align="center">First Name&nbsp;</TableCell>
+            <TableCell align="center">Last Name&nbsp;</TableCell>
+            <TableCell align="center">Email&nbsp;</TableCell>
+            {/* <TableCell align="left">Business&nbsp;</TableCell> */}
+            <TableCell align="center">Admin status&nbsp;</TableCell>
+            <TableCell align="center">Change Status&nbsp;</TableCell>
+            <TableCell align="center">Delete User&nbsp;</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -96,13 +96,13 @@ const UsersTablePage = () => {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">{user._id}</TableCell>
-              <TableCell align="left">{user.firstName}</TableCell>
-              <TableCell align="left">{user.lastName}</TableCell>
-              <TableCell align="left">{user.email}</TableCell>
-              <TableCell align="left">{user.biz ? "true" : "false"}</TableCell>
-              <TableCell align="left">{user.isAdmin ? "true" : "false"}</TableCell>
-              <TableCell align="left">{user.isAdmin ? "" : <button onClick={() => handleStatusBtn(user._id)}>change status</button>}</TableCell>
-              <TableCell align="left">{user.isAdmin ? "" : <button onClick={() => handleDeleteFromInitialUsersArr(user._id)}>Delete</button>}</TableCell>
+              <TableCell align="center">{user.name.firstName}</TableCell>
+              <TableCell align="center">{user.name.lastName}</TableCell>
+              <TableCell align="center">{user.email}</TableCell>
+              {/* <TableCell align="left">{user.biz ? "true" : "false"}</TableCell> */} 
+              <TableCell align="center">{user.isAdmin ? "true" : "false"}</TableCell>
+              <TableCell align="center">{user.isAdmin ? "" : <button onClick={() => handleStatusBtn(user._id)}>change status</button>}</TableCell>
+              <TableCell align="center">{user.isAdmin ? "" : <button onClick={() => handleDeleteFromInitialUsersArr(user._id)}>Delete</button>}</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -11,7 +11,7 @@ const loginSchema = Joi.object({
   password: Joi.string()
     .regex(
       new RegExp(
-        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]{4})(?=.*[!@%$#^&*-_*]).{8,}$/
       )
     )
     .required(),

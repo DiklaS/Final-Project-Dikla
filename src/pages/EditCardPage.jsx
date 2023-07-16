@@ -27,23 +27,20 @@ const EditCardPage = () => {
       .get("/cards/" + id)
       .then(({ data }) => {
         let newInputState = {...data};
-
-        if (data.image && data.image.url) {newInputState.url = data.image.url;}
-        else {newInputState.url = "";}
-        if (data.image && data.image.alt) {newInputState.alt = data.image.alt;} 
-        else {newInputState.alt = "";}
-
-
+        if (data.image && data.image.url) {newInputState.url = data.image.url;} else {newInputState.url = "";}
+        if (data.image && data.image.alt) {newInputState.alt = data.image.alt;} else {newInputState.alt = "";}
+        if (data.email) {newInputState.email = data.email;} else {newInputState.email = "";}
+        if (data.size) {newInputState.size = data.size;} else {newInputState.size = "";}
+        if (data.price) {newInputState.price = String(data.price);} else {newInputState.price = "";}
         delete newInputState.image;
         delete newInputState.likes;
         delete newInputState._id;
         delete newInputState.user_id;
         delete newInputState.bizNumber;
         delete newInputState.createdAt;
-        delete newInputState.address;
-        delete newInputState.__v;
-
+        delete newInputState.__v;  
         setInputState(newInputState);
+        //console.log(newInputState)
       })
       .catch((err) => {
         console.log("err from axios", err);
@@ -57,10 +54,23 @@ const EditCardPage = () => {
       setInputsErrorsState(joiResponse);
       console.log(joiResponse);
       if (!joiResponse) {
-        //move to homepage
-        await axios.put("/cards/" + id, inputState);
-        navigate(ROUTES.HOME);
+        const newItem = {
+          item: inputState.item,
+          company: inputState.company,
+          price: inputState.price,
+          size: inputState.size,
+          location: inputState.location,
+          contactName: inputState.contactName,
+          phone: inputState.phone,
+          email: inputState.email,
+          image: {
+            url: inputState.url,
+            alt: inputState.alt,
+          },
       }
+        await axios.put("/cards/" + id, newItem);
+        navigate(ROUTES.HOME);
+    }
     } catch (err) {
       console.log("err", err);
       toast.error("errrrrrrrrrrrrrrrror");
@@ -117,16 +127,16 @@ const EditCardPage = () => {
         <Box component="div" noValidate sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             {[
-              {id: 'item',label: 'Item', required: true, },
-              {id: 'company',label: 'Company', required: true, },
-              {id: 'price',label: 'Price', required: true, },
-              {id: 'size',label: 'Size', required: false, },
-              {id: 'location',label: 'Location', required: true, },
-              {id: 'contactName',label: 'Contact Name', required: true},
-              {id: 'phone',label: 'Phone', required: true, },
-              {id: 'email',label: 'Email', required: false, },
-              {id: 'url',label: 'Image Url', required: true, },
-              {id: 'alt',label: 'Image alt', required: true, },
+              {id: 'item',label: 'Item', required: true, type: 'text'},
+              {id: 'company',label: 'Company', required: true, type: 'text'},
+              {id: 'price',label: 'Price', required: true, type: 'number'},
+              {id: 'size',label: 'Size', required: false, type:'text'},
+              {id: 'location',label: 'Location', required: true, type:'text'},
+              {id: 'contactName',label: 'Contact Name', required: true, type:'text'},
+              {id: 'phone',label: 'Phone', required: true, type:'text'},
+              {id: 'email',label: 'Email', required: false, type:'text'},
+              {id: 'url',label: 'Image Url', required: true, type:'text'},
+              {id: 'alt',label: 'Image alt', required: true, type:'text'},
             ].map(({id, label, required, type}) => (
               <Grid item xs={12} sm={6} key={id}>
                 <TextField
@@ -134,6 +144,7 @@ const EditCardPage = () => {
                   id={id}
                   label={label}
                   fullWidth
+                  type={type === "text" ? "text" : "number"}
                   value={inputState[id]}
                   onChange={handleInputChange}
                   error={(inputState && inputState[id] && inputsErrorsState && inputsErrorsState[id]) ? true : false}

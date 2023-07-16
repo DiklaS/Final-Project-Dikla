@@ -5,8 +5,8 @@ export const filterData = (data, filterString) => {
   }
   return data.filter(
     (item) =>
-      item.title.toLowerCase().startsWith(filterString) ||
-      item.bizNumber.toLowerCase().startsWith(filterString)
+      item.item.toLowerCase().startsWith(filterString) 
+      || item.bizNumber.toString().toLowerCase().startsWith(filterString)
   );
 };
 

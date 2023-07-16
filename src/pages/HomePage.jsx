@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Divider, Grid, Typography, ImageList, ImageListItem, ImageListItemBar  } from "@mui/material";
+import { Box, CircularProgress, Divider, Grid, Typography} from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -53,7 +53,7 @@ const HomePage = () => {
     let filter = "";
     if (qparams.filter) {
       filter = qparams.filter.toLowerCase();;
-    }
+    } 
       const newOriginalCardsArr = JSON.parse(
         JSON.stringify(originalCardsArr || data)
       );
