@@ -88,19 +88,19 @@ const MyCardsPage = () => {
               <Grid item xs={12} md={4} key={item._id + Date.now()} >
                 <CardComponent
                   id={item._id}
-                  title={item.title}
-                  subTitle={item.subTitle}
-                  description={item.description}
+                  item={item.item}
+                  company={item.company}
+                  price={item.price}
+                  size={item.price}
+                  contactName={item.contactName}
                   phone={item.phone}
-                  img={item.image ? item.image.url : ""}
+                  url={item.image.url}
+                  alt={item.image.alt}
+                  location={item.location}
                   onDelete={handleDeleteCardBtnClick}
                   onEdit={handleEditCardBtnClick}
                   canEdit={payload && (payload.biz || payload.isAdmin)}
                   onDetailedCard={handleDetailedCardFromInitialCardsArr}
-                  city={item.city}
-                  street={item.street}
-                  state={item.state}
-                  zipCode={item.zipCode}
                   likes={item.likes}
                   userId={item.user_id}
                   bizNumber={item.bizNumber}

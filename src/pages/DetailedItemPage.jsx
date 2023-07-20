@@ -9,6 +9,7 @@ const DetailedItemPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [detailedCardArr, setDetailedCardArr] = useState(null); 
+  //const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     axios
@@ -26,6 +27,11 @@ const DetailedItemPage = () => {
     navigate(ROUTES.HOME);
   };
 
+  /* const handleThumbnailClick = (image) => {
+    setSelectedImage(image);
+  }; */
+
+
   if (!detailedCardArr) {
     return <CircularProgress />;
   }  
@@ -41,9 +47,9 @@ const DetailedItemPage = () => {
         <Card sx={{ maxWidth: 'sm', marginY: 2, marginX: 'auto' }}>
           <CardMedia
             component="img"
-            alt={detailedCardArr.image.alt}
+            alt={detailedCardArr.image.alt} //{selectedImage ? selectedImage.alt : detailedCardArr.image.alt}
             height="auto"
-            image={detailedCardArr.image.url}
+            image={detailedCardArr.image.url} //{selectedImage ? selectedImage.url : detailedCardArr.image.url}
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div" style={{ display: "flex", justifyContent: "space-between", fontWeight: 'bold' }}>
@@ -52,29 +58,31 @@ const DetailedItemPage = () => {
             </Typography>
             <Divider />
             <ListItem >
-              <Typography variant="subtitle1" style={{ fontWeight: 'bold' }}> Produced by:</Typography>
+              <Typography variant="subtitle1" > Produced by:</Typography>
               <ListItemText primary={detailedCardArr.company} style={{ marginLeft: '10px' }}/>
             </ListItem>
             <ListItem >
-              <Typography variant="subtitle1" style={{ fontWeight: 'bold' }}> Size:</Typography>
+              <Typography variant="subtitle1" > Size:</Typography>
               <ListItemText primary={detailedCardArr.size} style={{ marginLeft: '10px' }}/>
             </ListItem>
             <ListItem >
-              <Typography variant="subtitle1" style={{ fontWeight: 'bold' }}>Contact Name: </Typography>
+              <Typography variant="subtitle1" >Contact Name: </Typography>
               <ListItemText primary={detailedCardArr.contactName} style={{ marginLeft: '10px' }} />
-              <Typography variant="subtitle1" style={{ fontWeight: 'bold' }}>Phone: </Typography>
+              <Typography variant="subtitle1" >Phone: </Typography>
               <ListItemText primary={detailedCardArr.phone} style={{ marginLeft: '10px' }} />
+              <Typography variant="subtitle1" >Email: </Typography>
+              <ListItemText primary={detailedCardArr.email} style={{ marginLeft: '10px' }} />
             </ListItem>
             <ListItem >
-              <Typography variant="subtitle1" style={{ fontWeight: 'bold' }}>Location: </Typography>
+              <Typography variant="subtitle1" >Location: </Typography>
               <ListItemText primary={detailedCardArr.location} style={{ marginLeft: '10px' }}/>
             </ListItem>
             <ListItem >
-              <Typography variant="subtitle1" style={{ fontWeight: 'bold' }}>Created at: </Typography>
+              <Typography variant="subtitle1" >Created at: </Typography>
               <ListItemText primary={new Date(detailedCardArr.createdAt).toLocaleDateString("en-US")} style={{ marginLeft: '10px' }}/>
             </ListItem>
             <ListItem >
-              <Typography variant="subtitle1" style={{ fontWeight: 'bold' }}>Item number:</Typography>
+              <Typography variant="subtitle1" >Item number:</Typography>
               <ListItemText primary={ detailedCardArr.bizNumber}  style={{ marginLeft: '10px' }} />
             </ListItem> 
           </CardContent>
@@ -82,6 +90,27 @@ const DetailedItemPage = () => {
             <Button variant="contained" size="medium" onClick={handleCloseBtnClick}>Close</Button>
           </CardActions>
         </Card>
+              {/* <div style={{ display: "flex", justifyContent: "center" }}>
+        {detailedCardArr.images.map((image, index) => (
+          <Card
+            key={index}
+            sx={{
+              maxWidth: 200,
+              margin: 2,
+              cursor: "pointer",
+              boxShadow: selectedImage === image ? "0 0 5px #000" : "none",
+            }}
+            onClick={() => handleThumbnailClick(image)}
+          >
+            <CardMedia
+              component="img"
+              alt={image.alt}
+              height="auto"
+              image={image.url}
+            />
+          </Card>
+        ))}
+      </div> */}
       </Container>
   );
 }

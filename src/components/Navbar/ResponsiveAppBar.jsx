@@ -21,7 +21,8 @@ const nonLoginPages = [{label: "Signup", url: ROUTES.SIGNUP},{label: "Login", ur
 const loginPages = [{label: 'Favorites', url: ROUTES.FAVORITES}];
 //const BusinessPages = [{label: 'My Cards', url: ROUTES.MYCARDS}];
 const AdminPages = [{label: 'My Cards', url: ROUTES.MYCARDS}, {label: 'CRM', url: ROUTES.CRM}];
-const settings = [{label: 'Profile', url: ROUTES.PROFILE}, {label: 'Logout', url: ROUTES.LOGOUT}]
+const settings = [{label: 'Profile', url: ROUTES.PROFILE}, {label: 'Logout', url: ROUTES.LOGOUT}];
+
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -61,7 +62,7 @@ function ResponsiveAppBar() {
     localStorage.clear();
     dispatch(authActions.logout());
   };
-  console.log("console.log(isLoggedIn)", isLoggedIn)
+  
   return (
     <AppBar position="static" >
       <Container maxWidth="xl">
@@ -127,8 +128,10 @@ function ResponsiveAppBar() {
               {(isLoggedIn && isAdmin) && AdminPages.map((page) => (
                 <NavLinkComponent key={page.url} {...page} />
               ))}  
+              
 
             </Menu>
+            
           </Box>
           {/* xs Screen */}
           <HiveIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />

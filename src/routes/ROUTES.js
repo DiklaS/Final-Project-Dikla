@@ -16,7 +16,9 @@ const ROUTES = {
   EDITCARD: "/edit/:id",
   BIZNUMBER: "/cards/bizNumber/:bizId",
   CRM: "/userstable",
-  
+  BIKES: "/bikes",
+  SHOES: "/shoes",
+  GLOVES: "/gloves",
 
 };
 

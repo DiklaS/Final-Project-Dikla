@@ -99,14 +99,14 @@ const FavoritesPage = () => {
               <Grid item xs={12} md={4} key={item._id + Date.now()}>
                 <CardComponent
                   id={item._id}
-                  item={item.title}
-                  company={item.subTitle}
-                  price={item.description}
-                  size={item.phone}
-                  url={item.image ? item.image.url : ""}
-                  alt={item.image ? item.image.alt : ""}
-                  location={item.city}
-                  contactName={item.street}
+                  item={item.item}
+                  company={item.company}
+                  price={item.price}
+                  size={item.size}
+                  url={item.image.url}
+                  alt={item.image.alt}
+                  location={item.location}
+                  contactName={item.contactName}
                   bizNumber={item.bizNumber}
                   phone={item.state}
                   likes={item.likes}

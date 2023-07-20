@@ -91,7 +91,7 @@ const ProfilePage = () => {
     const{id, value} = ev.target
     setInputState(prev => (
       {...prev,
-      [id]: value}
+      [id] : value}
     ));
    
   } 
@@ -174,7 +174,7 @@ const ProfilePage = () => {
                   id={id}
                   label={label}
                   fullWidth
-                  value={inputState[id] || ""}
+                  value={inputState[id] !== null ? String(inputState[id]) : ""}
                   //value={inputState[id] !== null ? inputState[id].toString() : ""}
                   //type={id === "houseNumber" ? "number" : "text"}
                   onChange={handleInputChange}

@@ -79,36 +79,42 @@ const CardComponent = ({
     <Card square raised>
       <CardActionArea onClick={handleDetailedCardBtnClick}>
         <CardMedia component="img" image={url} alt={alt} />
-        <CardHeader title={item} subheader={company}></CardHeader>
-        <Divider variant="middle" />
+        <CardHeader title={
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ fontSize: '20px', fontWeight: 'bold' }}>{`${item}, ${size}`}</span>
+              <span style={{ marginLeft: 'auto', fontSize: '20px', fontWeight: 'bold' }}>{price} NIS</  span>
+            </div>
+          } subheader={company}></CardHeader>
+        {/* <Divider variant="middle" />
         <CardContent>
           <Typography><strong>Phone: </strong>{phone}</Typography>
           <Typography><strong>Price:</strong> {price} </Typography>
           <Typography><strong>Card Number: </strong>{bizNumber}</Typography>
-        </CardContent>
+        </CardContent> */}
       </CardActionArea>
       <CardActions sx={{justifyContent:'space-between'}}>
+        
+        <Box>
+          {isLoggedIn && 
+          <IconButton aria-label="favorite" sx={{justifyContent: 'left'}} onClick={handleFavoritedChange}>
+            <FavoriteIcon color={isFavorited ? "error" : "inherit"}/>
+          </IconButton>}
+           {/*<IconButton aria-label="contact" sx={{justifyContent: 'right'}}>
+            <PhoneIcon />
+          </IconButton> */}
+        </Box>
         <Box>
           {(isAdmin || (payload && (userId === payload._id))) && <IconButton aria-label="delete" onClick={handleDeleteBtnClick}>
           <DeleteIcon />
           </IconButton>}
-          {canEdit  && <IconButton aria-label="edit" sx={{justifyContent: 'left'}} onClick={handleEditBtnClick}>
+          {canEdit  && <IconButton aria-label="edit"  onClick={handleEditBtnClick}>
           <EditIcon />
           </IconButton>}
         </Box>
-        <Box>
-          {isLoggedIn && 
-          <IconButton aria-label="favorite" onClick={handleFavoritedChange}>
-            <FavoriteIcon color={isFavorited ? "error" : "inherit"}/>
-          </IconButton>}
-          <IconButton aria-label="contact" sx={{justifyContent: 'right'}}>
-            <PhoneIcon />
-          </IconButton>
-        </Box>
       </CardActions>
     </Card>
-  );
-};
+          )}; 
+  
 
 CardComponent.propTypes = {
   id: PropTypes.string,

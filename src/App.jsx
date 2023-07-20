@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import ResponsiveAppBar from "./components/Navbar/ResponsiveAppBar";
 import MuiBottomNavigators from "./components/MuiBottomNavigators";
+import SecondaryAppBar from "./components/Navbar/SecondaryAppBar";
 import Router from "./routes/Router";
 import { useSelector } from "react-redux";
 import useLoggedIn from "./hooks/useLoggedIn";
@@ -19,7 +20,7 @@ import useLoggedIn from "./hooks/useLoggedIn";
 const light = {
   palette: {
     primary: {
-      main: '#07bc0c'
+      main: '#229742'
     }, 
       mode: "light",
     
@@ -36,6 +37,8 @@ const dark = {
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const loggedIn = useLoggedIn();
+ 
+  
   useEffect(() => {
     (async () => {
       await loggedIn();
@@ -64,6 +67,7 @@ function App() {
       <Container>
         <header>
           <ResponsiveAppBar />
+         
         </header>
         <main>{isLoading ? <CircularProgress /> : <Router />}</main>
         

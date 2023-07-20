@@ -7,63 +7,55 @@ import { toast } from "react-toastify";
 import useQueryParams from "../hooks/useQueryParams";
 import { useSelector } from "react-redux";
 import { filterData } from "../components/filterFunc";
-
-
+import SecondaryAppBar from "../components/Navbar/SecondaryAppBar";
 
 const HomePage = () => {
-  const [originalCardsArr, setOriginalCardsArr] = useState(null);
+  const [originalItemsArr, setOriginalItemsArr] = useState(null);
   const [itemsArr, setItemsArr] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState('All'); 
+
   const navigate = useNavigate();
   let qparams = useQueryParams();
   const payload = useSelector((bigPie) => bigPie.authSlice.payload);
 
+  const filterItemsByCategory = (items, category) => {
+    if (category === 'All') {
+      return items;
+    } else {
+      return items.filter((item) => item.item.trim().toLowerCase() === category.trim().toLowerCase());
+    }
+  };
+
   useEffect(() => {
-  axios
-    .get("/cards/")
-    .then(({ data }) => {
-      console.log("data", data);
-      filterFunc(data);
-    })
-    .catch((err) => {
-      console.log("err from axios", err);
-      toast.error("Oops");
-    });
-  
-    /* const filterFunc = (data) => {
-    let filter = "";
-    if (qparams.filter) {
-      filter = qparams.filter.toLowerCase();;
+    axios
+      .get("/cards/")
+      .then(({ data }) => {
+        setOriginalItemsArr(data);
+        filterFunc(data);
+      })
+      .catch((err) => {
+        console.log("err from axios", err);
+        toast.error("Oops");
+      });
+  }, []);
+
+  useEffect(() => {
+    if (originalItemsArr) {
+      filterFunc(originalItemsArr);
     }
-    if (originalCardsArr) {
-      
-      let newOriginalCardsArr = JSON.parse(JSON.stringify(originalCardsArr));
-      setCardsArr(
-        newOriginalCardsArr.filter((card) => card.title.toLowerCase().startsWith(filter) || card.bizNumber.toLowerCase().startsWith(filter))
-      );
-    } else if (data) {
-      
-      setOriginalCardsArr(data);
-      setCardsArr(data.filter((card) => card.title.toLowerCase().startsWith(filter) || card.bizNumber.toLowerCase().startsWith(filter)));
-    }
-  }; 
-  
-  }, [qparams.filter]);*/
+  }, [qparams.filter, selectedCategory, originalItemsArr]);
+
 
   const filterFunc = (data) => {
     let filter = "";
     if (qparams.filter) {
-      filter = qparams.filter.toLowerCase();;
+      filter = qparams.filter.toLowerCase();
     } 
-      const newOriginalCardsArr = JSON.parse(
-        JSON.stringify(originalCardsArr || data)
-      );
-      const filteredData = filterData(newOriginalCardsArr, filter);
-      setOriginalCardsArr(newOriginalCardsArr);
-      setItemsArr(filteredData);
-    };
-  }, [qparams.filter]);
-  
-  
+    const filteredData = filterData(data, filter);
+    const filteredItemsArr = filterItemsByCategory(filteredData, selectedCategory);
+    setItemsArr(filteredItemsArr);
+  };
+
   const handleDeleteFromInitialCardsArr = async (id) => {
     try {
       await axios.delete("/cards/" + id); // /cards/:id
@@ -83,17 +75,24 @@ const HomePage = () => {
     navigate(`/detailedcard/${id}`); 
   }; 
 
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  }
+
   if (!itemsArr) {
     return <CircularProgress />;
   } 
 
   return (
     <Box>
+      {/* Your other content */}
+      <SecondaryAppBar selectedCategory={selectedCategory} handleCategoryChange={handleCategoryChange} />
+      {/* The rest of your content */}
       <Typography variant="h4" textAlign={"center"} my={2}>
-        Cards Page
+        Bikes and everything around
       </Typography>
       <Typography variant="h6" textAlign={"center"} my={2}>
-        Here you can find cards of all our businesses.
+        Mountain biking is a sport that requires a lot of expensive equipment. Second hand equipment is a good way to reduce costs. This site presents second-hand equipment related to mountain biking from anywhere in Israel.
       </Typography>
       <Divider />
       <Grid container spacing={2} my={2}>
@@ -117,7 +116,6 @@ const HomePage = () => {
               onEdit={handleEditFromInitialCardsArr}
               onDetailedCard={handleDetailedCardFromInitialCardsArr}
               canEdit={payload && payload.isAdmin}
-             
             />
           </Grid>
           
@@ -126,7 +124,6 @@ const HomePage = () => {
       
     </Box> 
   );
-};
-
+        };
 
 export default HomePage;
