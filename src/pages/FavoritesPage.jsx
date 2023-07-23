@@ -17,22 +17,6 @@ const FavoritesPage = () => {
   const [favoritesArr, setFavoritesArr] = useState();
   let qparams = useQueryParams();
 
-  /*     useEffect(() => {
-    axios
-      .get("/cards/cards")
-      .then(({ data }) => {
-        //console.log("data", data);
-        const userFavorites = data.filter((card) => card.likes.includes(payload._id))
-        setFavoritesArr(userFavorites);
-        //console.log(userFavorites);
-        
-      })
-      .catch((err) => {
-        console.log("err from axios", err);
-        toast.error("Oops");
-      });
-    }, [favoritesArr]); */
-
   useEffect(() => {
     axios
       .get("/cards/favorites")

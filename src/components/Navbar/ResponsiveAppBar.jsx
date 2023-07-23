@@ -13,7 +13,7 @@ import woman_avatar from './woman_avatar.png';
 import { darkThemeActions } from "../../store/darkTheme";
 import SearchPartial from "./SearchPartial";
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import HiveIcon from '@mui/icons-material/Hive';
+import PedalBikeIcon from '@mui/icons-material/PedalBike';
 
 
 const pages = [{label: 'Home', url: ROUTES.HOME}, {label: "About", url: ROUTES.ABOUT}];
@@ -68,7 +68,7 @@ function ResponsiveAppBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{color: 'white'}}>
           {/* md Screen */}
-          <HiveIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <PedalBikeIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -84,7 +84,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            be busy
+            Ride Bike
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -134,7 +134,7 @@ function ResponsiveAppBar() {
             
           </Box>
           {/* xs Screen */}
-          <HiveIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <PedalBikeIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -151,7 +151,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            be busy
+            Ride Bike
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' },  }}>
            

@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Divider, Grid, Typography, TableContainer, Table, TableBody, Paper, IconButton} from "@mui/material";
+import { Box, CircularProgress, Divider, Grid, Typography, } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -8,11 +8,9 @@ import useQueryParams from "../hooks/useQueryParams";
 import { useSelector } from "react-redux";
 import { filterData } from "../components/filterFunc";
 import SecondaryAppBar from "../components/Navbar/SecondaryAppBar";
-import TableRawComponent from "../components/TableRawComponent";
-import ViewListIcon from '@mui/icons-material/ViewList';
-import ViewModuleIcon from '@mui/icons-material/ViewModule';
+import Button from "@mui/material";
 
-const HomePage = ({updateFavoritesArr}) => {
+const HomePage = () => {
   const [originalItemsArr, setOriginalItemsArr] = useState(null);
   const [itemsArr, setItemsArr] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('All'); 
@@ -59,14 +57,14 @@ const HomePage = ({updateFavoritesArr}) => {
     setItemsArr(filteredItemsArr);
   };
 
-   const switchToCardsView = () => {
+  const switchToCardsView = () => {
     setViewMode("cards");
   };
 
   const switchToTableView = () => {
     setViewMode("table");
   };
-
+  
   const handleDeleteFromInitialCardsArr = async (id) => {
     try {
       await axios.delete("/cards/" + id); // /cards/:id
@@ -96,23 +94,26 @@ const HomePage = ({updateFavoritesArr}) => {
 
   return (
     <Box>
+
       <SecondaryAppBar selectedCategory={selectedCategory} handleCategoryChange={handleCategoryChange} />
+
       <Typography variant="h4" textAlign={"center"} my={2}>
         Bikes and everything around
       </Typography>
       <Typography variant="h6" textAlign={"center"} my={2}>
         Mountain biking is a sport that requires a lot of expensive equipment. Second hand equipment is a good way to reduce costs. This site presents second-hand equipment related to mountain biking from anywhere in Israel.
       </Typography>
-      <Box display="flex" justifyContent="right" my={2}>
-        <IconButton variant="contained" color="primary" onClick={switchToCardsView} disabled={viewMode === "cards"}>
-          <ViewModuleIcon/>
-        </IconButton>
-        <IconButton variant="contained" color="primary" onClick={switchToTableView} disabled={viewMode === "table"}>
-          <ViewListIcon/>
-        </IconButton>
+  
+      <Box display="flex" justifyContent="center" my={2}>
+        <Button variant="contained" color="primary" onClick={switchToCardsView} disabled={viewMode === "cards"}>
+          Card View
+        </Button>
+        <Button variant="contained" color="primary" onClick={switchToTableView} disabled={viewMode === "table"}>
+          Table View
+        </Button>
       </Box>
       <Divider />
-      {viewMode === "cards" ? (
+      
       <Grid container spacing={2} my={2}>
         {itemsArr.map((item) => (
           <Grid item xs={12} md={4} key={item._id + Date.now()}>
@@ -133,33 +134,17 @@ const HomePage = ({updateFavoritesArr}) => {
               onDelete={handleDeleteFromInitialCardsArr}
               onEdit={handleEditFromInitialCardsArr}
               onDetailedCard={handleDetailedCardFromInitialCardsArr}
-              //onFavorite={handleFavoritedChange}
               canEdit={payload && payload.isAdmin}
               selectedCategory={selectedCategory}
               handleCategoryChange={handleCategoryChange}
             />
-          </Grid>))}
-          </Grid>) : (
-                <TableContainer component={Paper}>
-                  <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableBody>
-                      {itemsArr.map((row) => (
-                        <TableRawComponent
-                          key={row._id}
-                          row={row}
-                          canEdit={payload && payload.isAdmin}
-                          onDelete={handleDeleteFromInitialCardsArr}
-                          onEdit={handleEditFromInitialCardsArr}
-                          onDetailedCard={handleDetailedCardFromInitialCardsArr}
-                          //onFavorite={handleFavoritedChange}
-                        />
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              )}
-    </Box>
+          </Grid>
+          
+        ))}
+      </Grid>
+      
+    </Box> 
   );
-};
+        };
 
 export default HomePage;

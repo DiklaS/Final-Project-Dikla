@@ -23,7 +23,7 @@ const CardComponent = ({
   onEdit,
   onDetailedCard,
   updateFavoritesArr,
-  canEdit, 
+  canEdit, onFavorite,
   contactName, size, price, likes
 }) => {
   const isLoggedIn = useSelector((state) => state.authSlice.isLoggedIn);
@@ -35,7 +35,7 @@ const CardComponent = ({
       return !!likes.find(id => id === payload._id);
     }
     return false;
-    });
+    }) 
 
   const handleDeleteBtnClick = () => {
     console.log("id", id);
@@ -52,14 +52,12 @@ const CardComponent = ({
   const handleFavoritedChange = async () => {
    setIsFavorited(isFavorited => !isFavorited); 
     try {
-      
-      
       await axios.patch("/cards/" + id); 
       if (isFavorited === true)
       toast.info("Card was removed from favorites");
       if (updateFavoritesArr) {
       // Fetch the updated favorites data from the server
-      const response = await axios.get("/cards/get-my-fav-cards");
+      const response = await axios.get("/cards/favorites/");
       const updatedFavorites = response.data;
       updateFavoritesArr(updatedFavorites);
       } else
@@ -67,9 +65,8 @@ const CardComponent = ({
       } catch (err) {
       console.log("error when adding favorite", err.response.data);
     }
-  }; 
+  };  
 
-  
  
   /* if (!likes) {
     return <CircularProgress />;

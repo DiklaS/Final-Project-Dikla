@@ -1,14 +1,7 @@
 import { useEffect, useState } from "react";
-import {
-  Container,
-  ThemeProvider,
-  createTheme,
-  CssBaseline,
-  CircularProgress,
-} from "@mui/material";
+import {Container,ThemeProvider,createTheme,CssBaseline,CircularProgress,} from "@mui/material";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import "./App.css";
 import ResponsiveAppBar from "./components/Navbar/ResponsiveAppBar";
 import MuiBottomNavigators from "./components/MuiBottomNavigators";
@@ -67,7 +60,8 @@ function App() {
       <Container>
         <header>
           <ResponsiveAppBar />
-         
+          
+
         </header>
         <main>{isLoading ? <CircularProgress /> : <Router />}</main>
         
