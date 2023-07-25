@@ -16,6 +16,7 @@ import MyCardsPage from "../pages/MyCardsPage";
 import DetailedItemPage from "../pages/DetailedItemPage";
 import SignupPage from "../pages/SignupPage";
 import UsersTablePage from "../pages/UsersTablePage";
+import ItemsPage from "../pages/ItemsPage";
 
 
 
@@ -39,9 +40,11 @@ const Router = () => {
       <Route path={ROUTES.CREATECARD} element={<SuperProtectedRoute isAdmin={true} element={<CreateCardPage/>}/>}/>
       <Route path={ROUTES.MYCARDS} element={<SuperProtectedRoute isAdmin={true} isBiz={true} element={<MyCardsPage/>}/>}/>
       <Route path={ROUTES.CRM} element={<SuperProtectedRoute isAdmin={true} isBiz={true} element={<UsersTablePage/>}/>}/>
-      
-      <Route path="*" element={<h1>404</h1>} />
+      <Route path={ROUTES.RATING} element={<SuperProtectedRoute isAdmin={true} element={<ItemsPage/>}/>}/>
+
       <Route path={ROUTES.SIGNUP} element={<SignupPage/>}/>
+      <Route path="*" element={<h1>404</h1>} />
+      
       {/* //<Route path="/reg" element={<REGPage/>}/> */}
     </Routes>
     

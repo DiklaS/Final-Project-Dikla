@@ -20,7 +20,7 @@ const pages = [{label: 'Home', url: ROUTES.HOME}, {label: "About", url: ROUTES.A
 const nonLoginPages = [{label: "Signup", url: ROUTES.SIGNUP},{label: "Login", url: ROUTES.LOGIN}];
 const loginPages = [{label: 'Favorites', url: ROUTES.FAVORITES}];
 //const BusinessPages = [{label: 'My Cards', url: ROUTES.MYCARDS}];
-const AdminPages = [{label: 'My Cards', url: ROUTES.MYCARDS}, {label: 'CRM', url: ROUTES.CRM}];
+const AdminPages = [{label: 'My Cards', url: ROUTES.MYCARDS}, {label: 'CRM', url: ROUTES.CRM}, {label: 'RATING', url: ROUTES.RATING}];
 const settings = [{label: 'Profile', url: ROUTES.PROFILE}, {label: 'Logout', url: ROUTES.LOGOUT}];
 
 

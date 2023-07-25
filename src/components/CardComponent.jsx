@@ -1,7 +1,6 @@
 import {Card, CardActionArea, CardMedia, CardHeader,CardContent, Typography, CardActions, IconButton, Divider, Box } from "@mui/material";
 import PropTypes from "prop-types";
 import DeleteIcon from '@mui/icons-material/Delete';
-import PhoneIcon from '@mui/icons-material/Phone';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import EditIcon from '@mui/icons-material/Edit';
 import { useSelector } from 'react-redux';
@@ -67,6 +66,10 @@ const CardComponent = ({
     }
   };  
 
+  const handlelikesBtnClick = async () => {
+   
+  };  
+
  
   /* if (!likes) {
     return <CircularProgress />;
@@ -107,6 +110,7 @@ const CardComponent = ({
           {canEdit  && <IconButton aria-label="edit"  onClick={handleEditBtnClick}>
           <EditIcon />
           </IconButton>}
+       
         </Box>
       </CardActions>
     </Card>

@@ -24,6 +24,7 @@ const ProfilePage = () => {
   //const { id } = useParams();
   const payload = useSelector((bigPie) => bigPie.authSlice.payload);
   const id = payload._id;
+  const [userImageUrl, setUserImageUrl] = useState("");
 
   const fields = [
           { id: "firstName", path: "name.firstName", label: "First Name", required: true, type:"text" },
@@ -52,7 +53,8 @@ const ProfilePage = () => {
           const value = getNestedValue(newInputState, path);
           newInputState[id] = value || "";
         });
-        
+        //const imageUrl = inputState.imageUrl;
+        //setUserImageUrl(imageUrl || "");
         setInputState(newInputState);
         setIsAdmin(newInputState.isAdmin);
       })

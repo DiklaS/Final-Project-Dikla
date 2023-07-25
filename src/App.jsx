@@ -9,6 +9,7 @@ import SecondaryAppBar from "./components/Navbar/SecondaryAppBar";
 import Router from "./routes/Router";
 import { useSelector } from "react-redux";
 import useLoggedIn from "./hooks/useLoggedIn";
+import AutoLogoutPage from "./pages/AutoLogoutPage";
 
 const light = {
   palette: {
@@ -63,7 +64,11 @@ function App() {
           
 
         </header>
-        <main>{isLoading ? <CircularProgress /> : <Router />}</main>
+        <main>
+          {isLoading ? <CircularProgress /> : <Router />}
+          <AutoLogoutPage logoutTimeInMs={ 4 * 60 * 60 * 1000} /> 
+          
+        </main>
         
         <footer >
          {/*  <ThemeProvider theme={isDarkTheme ? createTheme(dark) : createTheme(light)}>
