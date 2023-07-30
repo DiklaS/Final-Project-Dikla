@@ -24,7 +24,9 @@ const ProfilePage = () => {
   //const { id } = useParams();
   const payload = useSelector((bigPie) => bigPie.authSlice.payload);
   const id = payload._id;
-  const [userImageUrl, setUserImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [imageFile, setImageFile] = useState(null);
+
 
   const fields = [
           { id: "firstName", path: "name.firstName", label: "First Name", required: true, type:"text" },
@@ -53,10 +55,10 @@ const ProfilePage = () => {
           const value = getNestedValue(newInputState, path);
           newInputState[id] = value || "";
         });
-        //const imageUrl = inputState.imageUrl;
-        //setUserImageUrl(imageUrl || "");
+
         setInputState(newInputState);
         setIsAdmin(newInputState.isAdmin);
+        setImageUrl(newInputState.imageUrl);
       })
       .catch((err) => {
         console.log("err from axios", err);
@@ -106,6 +108,27 @@ const ProfilePage = () => {
     setInputsErrorsState(joiResponse);
     //console.log(joiResponse)
   }, [inputState]);
+
+  const handleImageUpload = async (event) => {
+    const file = event.target.files[0];
+      try {
+        const formData = new FormData();
+        formData.append("image", file);
+      
+        const response = await axios.put(`/users/${id}/upload-image`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        
+        const imageUrl = response.data.imageUrl;
+        setImageUrl(imageUrl);
+        
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      }
+  };
+  
  
   
   const handleBtnClick = async () => {
@@ -125,7 +148,7 @@ const ProfilePage = () => {
       phone: inputState.phone,
       email: inputState.email,
       image: {
-        url: inputState.imageUrl,
+        url: imageUrl,
         alt: inputState.imageAlt,
       },
       address: {
@@ -138,16 +161,12 @@ const ProfilePage = () => {
       },
       isAdmin: isAdmin,
     };
-
-    
-
     await axios.put(`/users/${id}`, requestData);
-
     navigate(ROUTES.HOME);
   } catch (err) {
-    console.log("error from axios", err.response.data);
+    console.log("error from axios", err);
   }
-};
+  };
 
   
   if (!inputState) {
@@ -167,10 +186,29 @@ const ProfilePage = () => {
         <Typography component="h1" variant="h5">
           Profile Page
         </Typography>
+       
+        <Grid item xs={12} sm={6}>
+        {inputState.imageUrl && (
+            
+              <img
+                src={`http://localhost:8181${imageUrl}`}
+                alt="profile_image"
+                style={{ width: "100%", marginTop: "10px" }}
+              />
+            
+          )} </Grid>
         <Box component="div" noValidate sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             {fields.map(({ id, label, required }) => (
               <Grid item xs={12} sm={6} key={id}>
+                {id === "imageUrl" ? (
+                <input
+                  type="file"
+                  name="image"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                />
+                ) : (
                 <TextField
                   required={required}
                   id={id}
@@ -192,7 +230,7 @@ const ProfilePage = () => {
                       <span key={`error${index}`}>{item}</span>
                     ))
                   }
-                />
+                />)}
               </Grid>
             ))}
             <Grid item xs={12}>
@@ -225,7 +263,8 @@ const ProfilePage = () => {
                 fullWidth
                 sx={{mb: 5}}
                 variant="contained" 
-                onClick={handleBtnClick}
+                onClick={(event) => handleBtnClick(event)}
+                //onClick={handleBtnClick}
                 disabled={!inputState.firstName || !inputState.lastName || !inputState.phone || !inputState.email || !inputState.country || !inputState.city || !inputState.street || !inputState.houseNumber}
               >
                 SUBMIT
