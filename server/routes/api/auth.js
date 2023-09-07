@@ -84,7 +84,7 @@ async (req, res) => {
 
 //4. GET USER
 router.get("/:id", authmw,
-permissionsMiddlewareUser(true, false),
+permissionsMiddlewareUser(true, true),
 async (req, res) => {
   try {
     await usersValidationService.userIdValidation(req.params.id);
@@ -126,7 +126,7 @@ async (req, res) => {
     const loggedInUserId = req.userData._id; 
     if (req.params.id !== loggedInUserId) {
       return res.status(403).send("Unauthorized");
-    }
+    } 
     let user = await usersServiceModel.getUserById(req.params.id);
     if (!user) {
       return res.status(404).send("User not found");

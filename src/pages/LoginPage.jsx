@@ -1,13 +1,10 @@
 import { useState } from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Alert from "@mui/material/Alert";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import LoopOutlinedIcon from '@mui/icons-material/LoopOutlined';
@@ -15,6 +12,9 @@ import ROUTES from "../routes/ROUTES";
 import validateLoginSchema from "../validation/loginValidation";
 import useLoggedIn from "../hooks/useLoggedIn";
 import { toast } from "react-toastify";
+import ForgotPasswordPopup from "../components/ForgotPasswordPopup";
+import "./LoginPage.css"; 
+
 
 const LoginPage = () => {
   const [inputState, setInputState] = useState({
@@ -24,6 +24,15 @@ const LoginPage = () => {
   const [inputsErrorsState, setInputsErrorsState] = useState(null);
   const loggedIn = useLoggedIn();
   const navigate = useNavigate();
+  const [showForgotPasswordPopup, setShowForgotPasswordPopup] = useState(false);
+
+  const handleForgotPasswordClick = () => {
+    setShowForgotPasswordPopup(true); // Display the pop-up when clicked
+  };
+
+  const handleClosePopup = () => {
+    setShowForgotPasswordPopup(false); // Display the pop-up when clicked
+  };
 
   const handleBtnClick = async (ev) => {
     try {
@@ -71,10 +80,24 @@ const LoginPage = () => {
   };
 
   const handleInputChange = (ev) => {
-    let newInputState = JSON.parse(JSON.stringify(inputState));
-    newInputState[ev.target.id] = ev.target.value;
-    setInputState(newInputState);
+    const { id, value } = ev.target;
+    
+    setInputState((prevInputState) => ({
+      ...prevInputState,
+      [id]: value,
+    }));
+
+    const joiResponse = validateLoginSchema({
+      ...inputState,
+      [id]: value,
+    });
+
+    setInputsErrorsState((prevErrors) => ({
+      ...prevErrors,
+      [id]: joiResponse ? joiResponse[id] : null,
+    }));
   };
+  
   return (
     <Container component="main" maxWidth="md">
       <Box
@@ -123,6 +146,20 @@ const LoginPage = () => {
                   ))}
               />
             </Grid>
+            <Grid item xs={12}>
+              <Link onClick={handleForgotPasswordClick}>Forgot password? </Link>
+              {showForgotPasswordPopup && (
+              <div className="modal-overlay">
+              {/* Modal pop-up */}
+                <div className="modal">
+                  <span className="close-button" onClick={handleClosePopup} >
+                    &times;
+                  </span> 
+                  <ForgotPasswordPopup />              
+                </div>
+              </div>
+              )}
+            </Grid>  
             <Grid item xs={12} md={6}>
               <Button
               fullWidth
@@ -153,16 +190,6 @@ const LoginPage = () => {
               </Button>
             </Grid>
           </Grid>
-          
-          {/* <Grid container justifyContent="flex-end">
-            <Grid item>
-              <Link to={ROUTES.REGISTER}>
-                <Typography variant="body2">
-                  Did not have an account? Sign up
-                </Typography>
-              </Link>
-            </Grid>
-          </Grid> */}
         </Box>
       </Box>
     </Container>

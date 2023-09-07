@@ -17,7 +17,7 @@ import DetailedItemPage from "../pages/DetailedItemPage";
 import SignupPage from "../pages/SignupPage";
 import UsersTablePage from "../pages/UsersTablePage";
 import ItemsPage from "../pages/ItemsPage";
-
+import PasswordPage from "../pages/PasswordPage";
 
 
 //element={<ProtectedRoute element={<LogoutPage />} />}
@@ -43,6 +43,7 @@ const Router = () => {
       <Route path={ROUTES.RATING} element={<SuperProtectedRoute isAdmin={true} element={<ItemsPage/>}/>}/>
 
       <Route path={ROUTES.SIGNUP} element={<SignupPage/>}/>
+      <Route path={ROUTES.RESET_PASSWORD} element={<PasswordPage />} />
       <Route path="*" element={<h1>404</h1>} />
       
       {/* //<Route path="/reg" element={<REGPage/>}/> */}

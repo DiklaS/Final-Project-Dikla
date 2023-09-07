@@ -5,6 +5,9 @@ const initialState = {
   //isBiz: false,
   isAdmin: false,
   payload: null,
+  imageUrl: null,
+  imageAlt: null,
+
 };
 
 const authSlice = createSlice({
@@ -19,12 +22,16 @@ const authSlice = createSlice({
       state.payload = action.payload;
       //state.isBiz=action.payload.biz;
       state.isAdmin=action.payload.isAdmin;
+      state.imageUrl=action.payload.imageUrl;
+      state.imageAlt=action.payload.imageAlt;
     },
     logout(state) {
       state.isLoggedIn = false;
       state.payload = null;
       //state.isBiz=false;
       state.isAdmin=false;
+      state.imageUrl=null;
+      state.imageAlt=null;
     },
   },
 });

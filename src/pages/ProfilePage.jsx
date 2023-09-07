@@ -121,8 +121,8 @@ const ProfilePage = () => {
           },
         });
         
-        const imageUrl = response.data.imageUrl;
-        setImageUrl(imageUrl);
+       const imageUrl = response.data.imageUrl;
+        setImageUrl(imageUrl); 
         
       } catch (error) {
         console.error("Error uploading image:", error);
@@ -191,7 +191,7 @@ const ProfilePage = () => {
         {inputState.imageUrl && (
             
               <img
-                src={`http://localhost:8181${imageUrl}`}
+                src={imageUrl.startsWith("http") ? imageUrl : `http://localhost:8181${imageUrl}`}
                 alt="profile_image"
                 style={{ width: "100%", marginTop: "10px" }}
               />

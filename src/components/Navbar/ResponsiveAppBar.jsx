@@ -28,14 +28,13 @@ function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const isLoggedIn = useSelector((state) => state.authSlice.isLoggedIn);
-/*   const payload = useSelector((bigPie) => bigPie.authSlice.payload);
-  const userId = payload._id; */
+  //const payload = useSelector((bigPie) => bigPie.authSlice.payload);
+  const imageUrl = useSelector((bigState) => bigState.authSlice.imageUrl);
   const isAdmin = useSelector((bigState) => bigState.authSlice.isAdmin);
   const dispatch = useDispatch();
   const isDarkTheme = useSelector(
     (state) => state.darkThemeSlice.isDarkTheme
   );
-  
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -179,9 +178,10 @@ function ResponsiveAppBar() {
             </IconButton>}
           {isLoggedIn ? <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="avatar" src={woman_avatar}/>
-              </IconButton>
+             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                
+                <Avatar alt="avatar" src={imageUrl && imageUrl.startsWith("http") ? imageUrl : `http://localhost:8181${imageUrl}`}/>
+              </IconButton> 
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}

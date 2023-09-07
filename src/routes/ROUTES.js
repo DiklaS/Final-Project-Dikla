@@ -21,6 +21,7 @@ const ROUTES = {
   BIKES: "/bikes",
   SHOES: "/shoes",
   GLOVES: "/gloves",
+  RESET_PASSWORD: "/password/:token"
 
 };
 

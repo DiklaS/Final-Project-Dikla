@@ -15,9 +15,8 @@ const useLoggedIn = () => {
       if (!token) {
         return;
       }
-
-      await axios.get("/users/"+id);
       
+      await axios.get("/users/"+id);
       dispatch(authActions.login(payload));
     } catch (err) {
       //server error
