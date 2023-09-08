@@ -1,12 +1,13 @@
-# Ride Bike- Client side
+# Final Project- Ride Bike- Client side
 
 ### Demo link:
 
 Access my site at https://github.com/DiklaS/Final-Project-Dikla
 
+### To start the Project: npm start
 
-### Credits
+### Created By
 
-List of contriubutors:
+This project was created by Dikla Shaked as part of Full Stack Development course.
 
-Dikla Shaked, Web developer
+
