@@ -1,4 +1,4 @@
-# Ride Bike- Server side
+# Ride Bike- Client side
 
 ### Demo link:
 
