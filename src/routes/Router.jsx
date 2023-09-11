@@ -25,6 +25,7 @@ import PasswordPage from "../pages/PasswordPage";
 const Router = () => {
   return (
     <Routes>
+      <Route path="/" element={<HomePage />} /> 
       <Route path={ROUTES.HOME} element={<HomePage />} />
       <Route path={ROUTES.FAKEHOME} element={<Navigate to={ROUTES.HOME} />} />
       <Route path={ROUTES.ABOUT} element={<AboutPage />} />

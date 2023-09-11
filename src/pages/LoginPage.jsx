@@ -14,6 +14,7 @@ import useLoggedIn from "../hooks/useLoggedIn";
 import { toast } from "react-toastify";
 import ForgotPasswordPopup from "../components/ForgotPasswordPopup";
 import "./LoginPage.css"; 
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 
 
 const LoginPage = () => {
@@ -57,7 +58,7 @@ const LoginPage = () => {
       navigate(ROUTES.HOME);
     } catch (err) {
       console.log("login error", err);
-      toast.info(err.response.data);
+      toast.info(err.response.data.msg);
 
       const failingsNumber = +localStorage.getItem("failingsNumber") || 0;
       localStorage.setItem("failingsNumber", failingsNumber + 1);
@@ -185,6 +186,9 @@ const LoginPage = () => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 onClick={handleBtnClick}
+                disabled={
+                  !inputState.email || !inputState.password 
+                }
               >
                 Submit
               </Button>

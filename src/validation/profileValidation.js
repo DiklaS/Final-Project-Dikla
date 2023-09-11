@@ -10,7 +10,7 @@ const profileSchema = Joi.object({
     phone: Joi.string().min(7).max(14).label('Phone').required(),
     email: Joi.string().email({ tlds: { allow: false } }).required(),
     imageUrl: Joi.string().min(6).max(1024).label('Image URL').allow(""),
-    imageAlt: Joi.string().min(6).max(256).label('Image Alt').allow(""),
+    imageAlt: Joi.string().min(2).max(256).label('Image Alt').allow(""),
     state: Joi.string().min(2).max(256).allow(""),
     country: Joi.string().min(2).max(256).required(),
     city: Joi.string().min(2).max(256).required(),

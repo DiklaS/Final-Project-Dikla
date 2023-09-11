@@ -26,8 +26,8 @@ const registerSchema = Joi.object({
       )
       .required(),
     image: Joi.object().keys({
-      url: Joi.string().regex(new RegExp(/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/)).label("Last Name").allow(""),
-      alt: Joi.string().min(2).max(256).required().label("Last Name").allow(""),
+      url: Joi.string().regex(new RegExp(/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/)).label("Image Url").allow(""),
+      alt: Joi.string().min(2).max(256).required().label("Image Alt").allow(""),
         }).allow(""), 
     address: Joi.object()
       .keys({
@@ -35,7 +35,7 @@ const registerSchema = Joi.object({
         country: Joi.string().min(2).max(256).label("Country").required(),
         city: Joi.string().min(2).max(256).label("City").required(),
         street: Joi.string().min(2).max(256).label("Street").required(),
-        houseNumber: Joi.number().min(1).label("House Number").required(),
+        houseNumber: Joi.number().min(1).max(256).label("House Number").required(),
         zip: Joi.number().label("Zip").allow(null).allow(''),
       })
       .required(),
