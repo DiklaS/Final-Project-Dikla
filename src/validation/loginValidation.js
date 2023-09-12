@@ -14,21 +14,10 @@ const loginSchema = Joi.object({
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]{4})(?=.*[!@%$#^&*-_*]).{8,}$/
       )
     )
-    .required(),
-  /* email: Joi.string()
-    .email({ tlds: { allow: false } })
-
-    .required(),
-  password: Joi.string()
-    .pattern(new RegExp("^(?=.*[A-Z])(?=.*[a-z]).{0,}$"))
-    .messages({
-      "string.empty": "the password should not be empty",
-      "string.pattern.base":
-        "the password should be supper protected, this mean that its should contain only upper and lower case latter's",
-    })
-    .min(2)
-    .max(10)
-    .required(), */
+    .required().messages({
+      'string.pattern.base': 'Password must be 8 characters long and must include an uppercase letter, a lowercase letter, 4 numbers and (?=.*[!@%$#^&*-_*])',
+      'any.required': 'Password is required.',
+    }),
 });
 
 const validateLoginSchema = (userInput) => validation(loginSchema, userInput);
