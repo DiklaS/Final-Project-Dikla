@@ -18,7 +18,7 @@ import SignupPage from "../pages/SignupPage";
 import UsersTablePage from "../pages/UsersTablePage";
 import ItemsPage from "../pages/ItemsPage";
 import PasswordPage from "../pages/PasswordPage";
-
+import ContactPage from "../pages/ContactPage";
 
 //element={<ProtectedRoute element={<LogoutPage />} />}
 
@@ -42,7 +42,7 @@ const Router = () => {
       <Route path={ROUTES.MYCARDS} element={<SuperProtectedRoute isAdmin={true} isBiz={true} element={<MyCardsPage/>}/>}/>
       <Route path={ROUTES.CRM} element={<SuperProtectedRoute isAdmin={true} isBiz={true} element={<UsersTablePage/>}/>}/>
       <Route path={ROUTES.RATING} element={<SuperProtectedRoute isAdmin={true} element={<ItemsPage/>}/>}/>
-
+      <Route path={ROUTES.CONTACT} element={<ContactPage />} />
       <Route path={ROUTES.SIGNUP} element={<SignupPage/>}/>
       <Route path={ROUTES.RESET_PASSWORD} element={<PasswordPage />} />
       <Route path="*" element={<h1>404</h1>} />

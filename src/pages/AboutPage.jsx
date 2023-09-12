@@ -49,13 +49,13 @@ const AboutPage = () => {
                             <Typography variant="h6" gutterBottom>Form pages on the website</Typography>  
                             <List>
                                 <ListItem># User Signup</ListItem>
-                                <ListItem># User Login (With user blocking after 3 failed logins for 24 hrs.)</ListItem>
-                                <ListItem># User Profile (bonus task)</ListItem>
+                                <ListItem># User Login (With password update by sending a link to an email with a password update page- bonus task.)</ListItem>
+                                <ListItem># User Profile (User profile picture that will be uploaded to a folder on the computer- bonus task)</ListItem>
                                 <ListItem># Creat card</ListItem>
                                 <ListItem># Edit Card</ListItem>
                             </List>
                     </Item>
-                    
+                     
                 </Grid>
                 <Grid item xs={12} md={4} >
                   <Item><Typography variant="h6" gutterBottom>Favorites Page</Typography>

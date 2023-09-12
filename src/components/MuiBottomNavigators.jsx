@@ -2,6 +2,7 @@ import {Box, Typography, } from '@mui/material';
 import PedalBikeIcon from '@mui/icons-material/PedalBike';
 import { Link } from 'react-router-dom';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import ROUTES from '../routes/ROUTES';
 
 const MuiBottomNavigators = () => {
     return (
@@ -28,8 +29,12 @@ const MuiBottomNavigators = () => {
       <Typography variant="body2" color="text.primary" align="center">
         &copy; {new Date().getFullYear()} created by Dikla Shaked
       </Typography>
-      <div>
-        <Link to="https://www.linkedin.com/in/dikla-shaked" style={{ display: 'flex',textAlign: 'center', color: "inherit" }}>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Link to={ROUTES.CONTACT} style={{ textDecoration: 'none', color: "inherit", marginRight: '3' }}>
+         Contact us
+        </Link>
+        <span style={{ marginRight: '10px' }}></span>
+        <Link to="https://www.linkedin.com/in/dikla-shaked" style={{ display: 'flex', alignItems: 'center', color: "inherit" }}>
          <LinkedInIcon />
         </Link>
       </div>

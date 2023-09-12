@@ -17,7 +17,7 @@ const ROUTES = {
   BIZNUMBER: "/cards/bizNumber/:bizId",
   CRM: "/userstable",
   RATING: "/rating",
-
+  CONTACT: "/contact", 
   BIKES: "/bikes",
   SHOES: "/shoes",
   GLOVES: "/gloves",
