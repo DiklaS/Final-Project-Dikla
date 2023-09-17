@@ -1,9 +1,6 @@
-import { Typography, Divider, Grid, Box, List, ListItem, MenuItem} from "@mui/material";
-import homePageImg from './homePageImg.png';
+import { Typography, Divider, Grid, Box, List, ListItem} from "@mui/material";
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
-import favoritesPageImg from './FavoritesPageImg.png'
-import mycardsPageImg from './mycardsPageImg.png'
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -83,8 +80,15 @@ const AboutPage = () => {
                 </Grid>
                 
                 <Grid item xs={12} md={4} mb={2}>
-                  <Item><Typography variant="h6" gutterBottom></Typography>
-                    
+                  <Item>
+                    <Typography variant="h6" gutterBottom>Bonus tasks Completed:</Typography>
+                    <Typography textAlign={"left"}>
+                      1. Disconnection after 4 hours without using the application.<br></br>
+                      2. Limiting requests to the server in 24 hours.<br></br>
+                      3. User management table.<br></br>
+                      4. Favorites management table.<br></br>
+                      5. Password reset includes sending a link to the user.<br></br>
+                    </Typography>
                   </Item>
                 </Grid>
             </Grid>

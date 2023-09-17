@@ -151,7 +151,6 @@ const HomePage = ({updateFavoritesArr}) => {
                           onDelete={handleDeleteFromInitialCardsArr}
                           onEdit={handleEditFromInitialCardsArr}
                           onDetailedCard={handleDetailedCardFromInitialCardsArr}
-                          //onFavorite={handleFavoritedChange}
                         />
                       ))}
                     </TableBody>

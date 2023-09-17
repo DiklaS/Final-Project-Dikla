@@ -9,7 +9,6 @@ const DetailedItemPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [detailedCardArr, setDetailedCardArr] = useState(null); 
-  //const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     axios
@@ -26,11 +25,6 @@ const DetailedItemPage = () => {
   const handleCloseBtnClick = (ev) => {
     navigate(ROUTES.HOME);
   };
-
-  /* const handleThumbnailClick = (image) => {
-    setSelectedImage(image);
-  }; */
-
 
   if (!detailedCardArr) {
     return <CircularProgress />;
@@ -90,27 +84,7 @@ const DetailedItemPage = () => {
             <Button variant="contained" size="medium" onClick={handleCloseBtnClick}>Close</Button>
           </CardActions>
         </Card>
-              {/* <div style={{ display: "flex", justifyContent: "center" }}>
-        {detailedCardArr.images.map((image, index) => (
-          <Card
-            key={index}
-            sx={{
-              maxWidth: 200,
-              margin: 2,
-              cursor: "pointer",
-              boxShadow: selectedImage === image ? "0 0 5px #000" : "none",
-            }}
-            onClick={() => handleThumbnailClick(image)}
-          >
-            <CardMedia
-              component="img"
-              alt={image.alt}
-              height="auto"
-              image={image.url}
-            />
-          </Card>
-        ))}
-      </div> */}
+          
       </Container>
   );
 }

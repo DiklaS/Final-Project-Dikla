@@ -1,4 +1,4 @@
-import { Box, Typography, Divider, CircularProgress, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { Box, Typography, Divider, CircularProgress} from "@mui/material";
 //import { DataGrid } from '@mui/x-data-grid';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -13,10 +13,6 @@ import axios from "axios";
 
 const UsersTablePage = () => {
     const [usersArr, setUsersArr] = useState(null);
-    const [bizStatus, setBizStatus] = useState(null);
-    function createData(_id, firstName, lastName, email, biz, isAdmin) {
-      return { _id, firstName, lastName, email, biz, isAdmin };
-    }
 
   useEffect(() => {
   axios
@@ -84,7 +80,6 @@ const UsersTablePage = () => {
             <TableCell align="center">First Name&nbsp;</TableCell>
             <TableCell align="center">Last Name&nbsp;</TableCell>
             <TableCell align="center">Email&nbsp;</TableCell>
-            {/* <TableCell align="left">Business&nbsp;</TableCell> */}
             <TableCell align="center">Admin status&nbsp;</TableCell>
             <TableCell align="center">Change Status&nbsp;</TableCell>
             <TableCell align="center">Delete User&nbsp;</TableCell>
@@ -99,7 +94,6 @@ const UsersTablePage = () => {
               <TableCell align="center">{user.name.firstName}</TableCell>
               <TableCell align="center">{user.name.lastName}</TableCell>
               <TableCell align="center">{user.email}</TableCell>
-              {/* <TableCell align="left">{user.biz ? "true" : "false"}</TableCell> */} 
               <TableCell align="center">{user.isAdmin ? "true" : "false"}</TableCell>
               <TableCell align="center">{user.isAdmin ? "" : <button onClick={() => handleStatusBtn(user._id)}>change status</button>}</TableCell>
               <TableCell align="center">{user.isAdmin ? "" : <button onClick={() => handleDeleteFromInitialUsersArr(user._id)}>Delete</button>}</TableCell>

@@ -8,7 +8,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import ROUTES from "../routes/ROUTES";
@@ -25,8 +25,6 @@ const ProfilePage = () => {
   const payload = useSelector((bigPie) => bigPie.authSlice.payload);
   const id = payload._id;
   const [imageUrl, setImageUrl] = useState("");
-  const [imageFile, setImageFile] = useState(null);
-
 
   const fields = [
           { id: "firstName", path: "name.firstName", label: "First Name", required: true, type:"text" },

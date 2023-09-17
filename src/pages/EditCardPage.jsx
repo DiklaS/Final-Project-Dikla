@@ -5,15 +5,12 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import {Typography, Divider} from "@mui/material";
 import Container from "@mui/material/Container";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import LoopOutlinedIcon from '@mui/icons-material/LoopOutlined';
 import ROUTES from "../routes/ROUTES";
-import validateEditSchema, {
-  validateEditCardParamsSchema,
-} from "../validation/editValidation";
+import validateEditSchema from "../validation/editValidation";
 import { CircularProgress } from "@mui/material";
-import atom from "../logo.svg";
 import { toast } from "react-toastify";
 
 const EditCardPage = () => {
@@ -73,7 +70,7 @@ const EditCardPage = () => {
     }
     } catch (err) {
       console.log("err", err);
-      toast.error("errrrrrrrrrrrrrrrror");
+      toast.error("An error occurred, the details have not been updated");
     }
   };
 

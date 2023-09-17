@@ -4,20 +4,15 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-//import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-//import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Alert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
 import validateRegisterSchema from "../validation/registerValidation";
 import ROUTES from "../routes/ROUTES";
-
-
+import { toast } from "react-toastify";
 
 const SignupPage = () => {
   const initInputState ={name: {firstName: "",middleName: "",lastName: ""},phone: "",email: "",password: "",image: {url: "",alt: ""},address: {state: "",country: "",city: "",street: "",houseNumber: "",zip: ""}
@@ -55,9 +50,15 @@ const SignupPage = () => {
     };
       console.log(requestData)
       await axios.post("/users", requestData);
+      toast.info('Registration process completed successfully')
       navigate(ROUTES.LOGIN);
     } catch (err) {
-      console.log("error from axios", err.response.data);
+        console.log("error from axios", err.response.data.error);
+        if (err.response && err.response.data && err.response.data.error) {
+          toast.error(err.response.data.error);
+        } else {
+        toast.error('Registration process did not complete successfully, please try again');
+      }
     }
   };
 
@@ -71,14 +72,6 @@ const SignupPage = () => {
     setInputsErrorsState({})
   };  
 
-  /* const handleInputChange = (ev) => {
-    const{id, value} = ev.target
-    setInputState(prev => (
-      {...prev,
-      [id]: value}
-    ));
-   
-  }  */
   const handleInputChange = (ev) => {
   const { id, value } = ev.target;
   if (id.startsWith("name")) {
@@ -171,9 +164,7 @@ useEffect(() => {
                   onChange={handleInputChange}
                   error={(inputsErrorsState && (inputState[id]  ||  inputState[id.split(".")[0]][id.split(".")[1]] ) && (inputsErrorsState[id]  || inputsErrorsState[id.split(".")[1]] )) ? true : false}
                   helperText = {inputsErrorsState && (inputState[id]  ||  inputState[id.split(".")[0]][id.split(".")[1]] ) && ((inputsErrorsState[id] && inputsErrorsState[id].map((error) => (<span key={error}>{error}</span>))) || (inputsErrorsState[id.split(".")[1]] && inputsErrorsState[id.split(".")[1]].map((error) => (<span key={error}>{error}</span>))))}
-                  
                 />
-                
             </Grid>
             ))}
             <Grid item xs={12}>

@@ -39,31 +39,27 @@ const PasswordPage = () => {
       errors.push(validationResult.error.message);
     }
 
-    // If there are validation errors, set them in the 'passwordErrors' state
     if (errors.length > 0) {
       setPasswordErrors(errors);
-      return; // Exit the function since there are validation errors
+      return; 
     }
 
-    // If validation is successful, make a POST request to change the password
     const response = await axios.post(`/users/password_reset`, {
       newPassword: newPassword,
       resetToken: token,
     });
 
     if (response.status === 200) {
-      // Password change was successful
       console.log('Password changed successfully');
       toast.info('Password changed successfully');
-      navigate(ROUTES.LOGIN); // Redirect to the login page
+      navigate(ROUTES.LOGIN); 
     } else {
-      // Handle error in the response from the server
       console.error('Password change failed');
       toast.error('Password change failed');
     }
   } catch (error) {
-    // Handle unexpected errors (e.g., network issues, server errors)
     console.error('Error:', error);
+    setPasswordErrors([]);
   }
 };
 
@@ -82,10 +78,10 @@ const PasswordPage = () => {
           margin="normal"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
-          error={passwordErrors.length > 0} // Set error state based on the number of errors
+          error={passwordErrors.length > 0} 
           helperText={passwordErrors.map((error) => (
             <span key={error}>{error}</span>
-          ))} // Display all error messages
+          ))}
         />
 
         <Button
